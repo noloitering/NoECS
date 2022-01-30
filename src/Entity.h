@@ -1,21 +1,41 @@
+#include <unordered_map>
 #include "Component.h"
 
-namespace ECS
+namespace NoECS
 {
 	class Entity : public CContainer
 	{
 	private:
-		const size_t m_id = 0;
-		const std::string m_tag = "default";
-		bool m_active = true;
+		const size_t id = 0;
+		const std::string tag = "default";
+		bool active = true;
 	
+	public:
+		Entity(const size_t & i, const std::string & t, bool a=true)
+			: id(i), tag(t), active(a) {}
 		void destroy()
 		{
-			m_active = false;
+			active = false;
 		}
-	public:
-		Entity(const size_t & id, const std::string & tag, bool active = true)
-			: m_id(id), m_tag(tag), m_active(active) {}
+		
+		bool isAlive()
+		{
+			
+			return active;
+		}
+		
+		const std::string& getTag()
+		{
+			
+			return tag;
+		}
+		
+		const size_t getId()
+		{
+			
+			return id;
+		}
+		
 	};
 	
 	typedef std::vector<std::shared_ptr<Entity>> EntityVec;
@@ -31,8 +51,9 @@ namespace ECS
 		void clearEntities();
 		void update();
 		void removeEntity(std::shared_ptr<Entity> entity);
-		std::shared_ptr<Entity> addEntity(const std::string & tag);
-		EntityVec & getEntities();
-		EntityVec & getEntities(const std::string & tag);
+		std::shared_ptr<Entity> addEntity(const std::string& tag);
+		EntityVec& getEntities();
+		std::unordered_map<std::string, EntityVec>& getEntityMap();
+		EntityVec & getEntities(const std::string& tag);
 	};	
 }

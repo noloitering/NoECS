@@ -1,0 +1,3 @@
+[submodule "examples/include/raylib"]
+	path = examples/include/raylib
+	url = https://github.com/raysan5/raylib.git

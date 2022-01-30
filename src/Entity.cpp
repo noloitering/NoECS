@@ -1,5 +1,7 @@
 #include "Entity.h"
 
+using namespace NoECS;
+
 EntityManager::EntityManager()
 {
 	
@@ -23,7 +25,7 @@ void EntityManager::update()
 	{
 		for (auto a : toAdd)
 		{
-			new_map[a->tag()].push_back(a);
+			new_map[a->getTag()].push_back(a);
 		}
 		toAdd.clear();
 	}
@@ -47,7 +49,7 @@ std::shared_ptr<Entity> EntityManager::addEntity(const std::string & tag)
 	return e;
 }
 
-EntityVec & EntityManager::getEntities()
+EntityVec& EntityManager::getEntities()
 {
 	EntityVec result;
 	
@@ -60,6 +62,12 @@ EntityVec & EntityManager::getEntities()
 	}
 	
 	return result;
+}
+
+std::unordered_map<std::string, EntityVec>& EntityManager::getEntityMap()
+{
+	
+	return entities;
 }
 
 EntityVec & EntityManager::getEntities(const std::string & tag)
