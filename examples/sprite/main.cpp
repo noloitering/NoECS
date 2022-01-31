@@ -8,7 +8,7 @@ int fps = 60;
 
 int main(int argc, char ** argv)
 {
-	InitWindow(window.x, window.y, "boundsBounce");
+	InitWindow(window.x, window.y, "Sprite");
 	SetTargetFPS(fps);
 	NoECS::EntitySystem game = NoECS::EntitySystem();
 	std::shared_ptr< Texture > texture = std::make_shared< Texture >(LoadTexture("../resources/player3.png"));
