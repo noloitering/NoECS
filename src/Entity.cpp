@@ -32,9 +32,10 @@ void EntityManager::update()
 	entities = new_map;
 }
 
-void EntityManager::clearEntities()
+void EntityManager::clear()
 {
 	entities.clear();
+	total = 0;
 }
 
 void EntityManager::removeEntity(std::shared_ptr<Entity> entity)
@@ -51,13 +52,13 @@ std::shared_ptr<Entity> EntityManager::addEntity(const std::string & tag)
 
 EntityVec& EntityManager::getEntities()
 {
-	EntityVec result;
+	EntityVec result(total);
 	
 	for (auto it=entities.begin(); it != entities.end(); it++)
 	{
 		for (std::shared_ptr< Entity > e : it->second)
 		{
-			result.push_back(e);
+			result.at(e->getId()) = e;
 		}
 	}
 	
@@ -73,4 +74,30 @@ std::unordered_map<std::string, EntityVec>& EntityManager::getEntityMap()
 EntityVec & EntityManager::getEntities(const std::string & tag)
 {
 	return entities[tag];
+}
+
+size_t EntityManager::getTotal()
+{
+	
+	return total;
+}
+
+void EntityManager::setEntities(const EntityVec& vec)
+{
+	clear();
+	for (auto elem : vec)
+	{
+		entities[elem->getTag()].push_back(elem);
+		total++;
+	}
+}
+
+void EntityManager::setEntities(const std::unordered_map<std::string, EntityVec>& map)
+{
+	clear();
+	entities = map;
+	for (auto elemTag : entities)
+	{
+		total += elemTag.second.size();
+	}
 }

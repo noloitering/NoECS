@@ -48,12 +48,15 @@ namespace NoECS
 		size_t total = 0;
 	public:
 		EntityManager();
-		void clearEntities();
+		void clear();
 		void update();
 		void removeEntity(std::shared_ptr<Entity> entity);
 		std::shared_ptr<Entity> addEntity(const std::string& tag);
-		EntityVec& getEntities();
+		size_t getTotal();
+		EntityVec& getEntities(); // in order of ID
+		EntityVec& getEntities(const std::string& tag); // in map order
 		std::unordered_map<std::string, EntityVec>& getEntityMap();
-		EntityVec & getEntities(const std::string& tag);
+		void setEntities(const EntityVec& vec);
+		void setEntities(const std::unordered_map<std::string, EntityVec>& map);
 	};	
 }
