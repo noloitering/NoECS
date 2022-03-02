@@ -1,8 +1,9 @@
 #include "Entity.h"
+#include "Model.h"
 
 namespace NoECS
 {	
-	class EntitySystem : public Model
+	class EntitySystem : public NoMVC::Model
 	{
 	public:
 		EntitySystem() {}
