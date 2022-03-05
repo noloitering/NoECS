@@ -38,7 +38,7 @@ namespace NoECS
 		
 	};
 	
-	typedef std::vector<std::shared_ptr<Entity>> EntityVec;
+	typedef std::vector<std::shared_ptr< Entity > > EntityVec;
 
 	class EntityManager
 	{
@@ -53,7 +53,7 @@ namespace NoECS
 		void removeEntity(std::shared_ptr<Entity> entity);
 		std::shared_ptr<Entity> addEntity(const std::string& tag);
 		size_t getTotal();
-		EntityVec& getEntities(); // in order of ID
+		EntityVec getEntities(); // in order of ID
 		EntityVec& getEntities(const std::string& tag); // in map order
 		std::unordered_map<std::string, EntityVec>& getEntityMap();
 		void setEntities(const EntityVec& vec);

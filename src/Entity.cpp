@@ -50,7 +50,7 @@ std::shared_ptr<Entity> EntityManager::addEntity(const std::string & tag)
 	return e;
 }
 
-EntityVec& EntityManager::getEntities()
+EntityVec EntityManager::getEntities()
 {
 	EntityVec result(total);
 	for (auto it=entities.begin(); it != entities.end(); it++) // order by id
@@ -68,7 +68,7 @@ EntityVec& EntityManager::getEntities()
 			newVec.push_back(e);
 		}
 	}
-	
+
 	return newVec;
 }
 
