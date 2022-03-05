@@ -8,6 +8,7 @@
 
 namespace NoECS
 {
+	const int SPRITE_SIZE = 64;
 	class CInterface
 	{
 	public:
@@ -42,7 +43,19 @@ namespace NoECS
 	{
 	public:
 		CSprite(std::shared_ptr< Texture2D > t=nullptr, int f = 1, int cf = 1, const Color &c = WHITE)
-			: texture(t), renderArea((Rectangle){0.0f, 0.0f, 64, 64}), frames(f), currentFrame(cf), col(c) {}
+			: texture(t), frames(f), currentFrame(cf), col(c) 
+			{
+				Rectangle ra;
+				if ( t )
+				{
+					ra = {0, 0, t->width / f, t->height};
+				}
+				else
+				{
+					ra = {0.0f, 0.0f, SPRITE_SIZE, SPRITE_SIZE};
+				}
+				renderArea = ra;
+			}
 		CSprite(std::shared_ptr< Texture2D > t, Rectangle &ra, int f = 1, int cf = 1, const Color &c = WHITE)
 			: texture(t), renderArea(ra), frames(f), currentFrame(cf), col(c) {}
 		std::shared_ptr< Texture2D > texture;
