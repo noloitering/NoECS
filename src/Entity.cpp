@@ -53,16 +53,23 @@ std::shared_ptr<Entity> EntityManager::addEntity(const std::string & tag)
 EntityVec& EntityManager::getEntities()
 {
 	EntityVec result(total);
-	
-	for (auto it=entities.begin(); it != entities.end(); it++)
+	for (auto it=entities.begin(); it != entities.end(); it++) // order by id
 	{
 		for (std::shared_ptr< Entity > e : it->second)
 		{
 			result.at(e->getId()) = e;
 		}
 	}
+	EntityVec newVec;
+	for (std::shared_ptr< Entity > e : result) // eliminate deleted entities
+	{
+		if ( e )
+		{
+			newVec.push_back(e);
+		}
+	}
 	
-	return result;
+	return newVec;
 }
 
 std::unordered_map<std::string, EntityVec>& EntityManager::getEntityMap()
