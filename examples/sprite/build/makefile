@@ -85,7 +85,7 @@ endif
 
 ifeq ($(PLATFORM_OS),WINDOWS)
 	LIBFLAGS += -lopengl32 -lgdi32 -static -lpthread -lws2_32 -lwinmm
-	RAYLIB_LIBS += $(RAYLIB_SRC)/raylib.rc.data
+#	RAYLIB_LIBS += $(RAYLIB_SRC)/raylib.rc.data
 	MAKE = mingw32-make
 endif
 
