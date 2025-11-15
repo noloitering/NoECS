@@ -25,7 +25,7 @@
 # paths
 EXE_NAME ?= client
 DESTDIR ?= ./
-SRC ?= ../main.cpp ../../../src/Entity.cpp ../../../src/System.cpp
+SRC ?= ../main.cpp ../../../src/Entity.cpp ../../../src/System.cpp ../../../src/Core.cpp
 OBJS = $(patsubst %.c, %.o, $(SRC))
 
 # compiler

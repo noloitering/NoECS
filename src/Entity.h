@@ -1,18 +1,17 @@
 #include <unordered_map>
 #include "Component.h"
+#include "Core.h"
 
 namespace NoECS
 {
-	class Entity : public CContainer
+	class Entity : public CContainer, public NoMAD::GameObj
 	{
-	private:
-		const size_t id = 0;
-		const std::string tag = "default";
+	protected:
 		bool active = true;
 	
 	public:
-		Entity(const size_t & i, const std::string & t, bool a=true)
-			: id(i), tag(t), active(a) {}
+		Entity(const size_t & i, const char* t, const char* in="", bool a=true)
+			: NoMAD::GameObj(i, t, in), active(a) {}
 		void destroy()
 		{
 			active = false;
@@ -23,19 +22,6 @@ namespace NoECS
 			
 			return active;
 		}
-		
-		const std::string& getTag()
-		{
-			
-			return tag;
-		}
-		
-		const size_t getId()
-		{
-			
-			return id;
-		}
-		
 	};
 	
 	typedef std::vector<std::shared_ptr< Entity > > EntityVec;
@@ -51,7 +37,7 @@ namespace NoECS
 		void clear();
 		void update();
 		void removeEntity(std::shared_ptr<Entity> entity);
-		std::shared_ptr<Entity> addEntity(const std::string& tag);
+		std::shared_ptr<Entity> addEntity(const char* tag, const char* in="");
 		size_t getTotal();
 		EntityVec getEntities(); // in order of ID
 		EntityVec& getEntities(const std::string& tag); // in map order
