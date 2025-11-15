@@ -3,6 +3,8 @@
 #include <memory>
 #include <variant>
 #include <vector>
+#include <string>
+#include <cstring>
 
 #include "raylib.h"
 
